@@ -61,12 +61,14 @@
             box-sizing: border-box;
             transition: transform 0.2s ease;
             background-color: #ffe5e0; /* Fondo pastel rosado */
+            z-index: 1; /* Piezas por encima de la plantilla */
         }
 
         .puzzle-piece.correct {
             cursor: default;
             border-color: #ff477e; /* Borde rosado más oscuro */
             pointer-events: none;
+            z-index: 0; /* Piezas correctas por debajo de las piezas restantes */
         }
 
         #congrats-message {
@@ -87,8 +89,8 @@
         }
 
         #congrats-message img {
-            width: 100%;
-            max-width: 300px; /* Tamaño de la imagen */
+            width: 300px; /* Mismo tamaño que la plantilla */
+            height: 450px; /* Mismo tamaño que la plantilla */
             margin-top: 10px;
             border-radius: 10px;
             border: 2px solid #ff6f61; /* Borde rosado */
