@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden; /* Evita el desplazamiento */
-            background-color: #f0f0f0;
+            background-color: #f8d7e6; /* Fondo pastel rosado */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,14 +22,15 @@
             position: relative;
             width: 300px; /* Tamaño reducido para móviles */
             height: 450px; /* Mantiene la proporción 1,333 x 2,000 */
-            border: 1px solid #ccc; /* Borde más delgado */
+            border: 1px solid #ff85a2; /* Borde rosado */
+            background-color: #fff0f6; /* Fondo pastel rosado */
         }
 
         #template {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('t.jpg');
+            background-image: url('t,jpg');
             background-size: 300px 450px; /* Mantiene la proporción de la imagen */
             opacity: 0.3; /* Hace la plantilla semi-transparente */
             pointer-events: none; /* Evita que la plantilla interfiera con las piezas */
@@ -43,8 +44,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, transparent 99%, rgba(0, 0, 0, 0.5) 1%),
-                        linear-gradient(to bottom, transparent 99%, rgba(0, 0, 0, 0.5) 1%);
+            background: linear-gradient(to right, transparent 99%, rgba(255, 133, 162, 0.5) 1%),
+                        linear-gradient(to bottom, transparent 99%, rgba(255, 133, 162, 0.5) 1%);
             background-size: 100px 150px; /* Tamaño de cada pieza */
         }
 
@@ -52,14 +53,14 @@
             position: absolute;
             cursor: grab;
             user-select: none;
-            border: 1px solid #000; /* Borde más delgado */
+            border: 1px solid #ff85a2; /* Borde rosado */
             box-sizing: border-box;
             transition: transform 0.2s ease;
         }
 
         .puzzle-piece.correct {
             cursor: default;
-            border-color: green;
+            border-color: #ff477e; /* Borde rosado más oscuro */
             pointer-events: none; /* Evita que la pieza se mueva una vez colocada */
         }
 
@@ -69,13 +70,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 128, 0, 0.9);
-            color: white;
+            background-color: #fff0f6; /* Fondo pastel rosado */
+            color: #ff477e; /* Texto rosado más oscuro */
             padding: 20px;
             border-radius: 10px;
             font-size: 24px;
             text-align: center;
             z-index: 1000;
+            border: 2px solid #ff85a2; /* Borde rosado */
+            box-shadow: 0 4px 10px rgba(255, 133, 162, 0.3); /* Sombra rosada */
+        }
+
+        #congrats-message img {
+            width: 100%;
+            max-width: 300px; /* Tamaño de la imagen */
+            margin-top: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff85a2; /* Borde rosado */
         }
     </style>
 </head>
@@ -83,7 +94,10 @@
     <div id="puzzle-container">
         <div id="template"></div> <!-- Plantilla de fondo -->
     </div>
-    <div id="congrats-message">¡Felicidades! Has completado el rompecabezas.</div>
+    <div id="congrats-message">
+        <div>Te amo</div>
+        <img src="t.jpg" alt="Imagen completada">
+    </div>
 
     <script>
         // Configuración del rompecabezas
@@ -217,7 +231,7 @@
                     const touch = e.touches[0];
                     offsetX = touch.clientX - element.getBoundingClientRect().left;
                     offsetY = touch.clientY - element.getBoundingClientRect().top;
-                    e.preventDefault(); // Evita el desplazamiento táctil
+                    e.preventDefault(); /* Evita el desplazamiento táctil */
                 }
             });
 
@@ -228,7 +242,7 @@
                     const y = touch.clientY - offsetY;
                     element.style.left = `${x}px`;
                     element.style.top = `${y}px`;
-                    e.preventDefault(); // Evita el desplazamiento táctil
+                    e.preventDefault(); /* Evita el desplazamiento táctil */
                 }
             });
 
