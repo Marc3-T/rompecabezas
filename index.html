@@ -36,6 +36,8 @@
             background-size: 300px 450px; /* Mantiene la proporción de la imagen */
             opacity: 0.3; /* Hace la plantilla semi-transparente */
             pointer-events: none;
+            border: 2px solid #ff6f61; /* Borde rosado */
+            box-sizing: border-box; /* Incluye el borde en el tamaño */
         }
 
         /* Líneas de división en la plantilla */
@@ -86,9 +88,7 @@
 
         #congrats-message img {
             width: 100%;
-            height: 100%;
             max-width: 300px; /* Tamaño de la imagen */
-            max-height: 450px;
             margin-top: 10px;
             border-radius: 10px;
             border: 2px solid #ff6f61; /* Borde rosado */
@@ -212,10 +212,10 @@
                     const pieceX = rect.left - puzzleRect.left;
                     const pieceY = rect.top - puzzleRect.top;
 
-                    // Margen de error aumentado a 30px
+                    // Margen de error aumentado a 50px
                     if (
-                        Math.abs(pieceX - element.correctX) < 30 &&
-                        Math.abs(pieceY - element.correctY) < 30
+                        Math.abs(pieceX - element.correctX) < 50 &&
+                        Math.abs(pieceY - element.correctY) < 50
                     ) {
                         // Colocar la pieza en la posición correcta (relativa al contenedor del rompecabezas)
                         element.style.left = `${puzzleRect.left + element.correctX}px`;
@@ -261,7 +261,7 @@
                     const pieceX = rect.left - puzzleRect.left;
                     const pieceY = rect.top - puzzleRect.top;
 
-                    // Margen de error aumentado a 30px
+                    // Margen de error aumentado a 50px
                     if (
                         Math.abs(pieceX - element.correctX) < 50 &&
                         Math.abs(pieceY - element.correctY) < 50
