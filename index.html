@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rompecabezas Sencillo</title>
+    <title>Rompecabezas Seno</title>
     <style>
         body {
             margin: 0;
@@ -20,8 +20,8 @@
 
         #puzzle-container {
             position: relative;
-            width: 300px; /* Tamaño del rompecabezas */
-            height: 300px;
+            width: 666.5px; /* Mitad del ancho de la imagen (1,333 / 2) */
+            height: 1000px; /* Mitad del alto de la imagen (2,000 / 2) */
             border: 1px solid #ccc; /* Borde más delgado */
         }
 
@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             background-image: url('te amo.jpg');
-            background-size: 300px 300px; /* Asegura que la plantilla tenga el mismo tamaño que el rompecabezas */
+            background-size: 666.5px 1000px; /* Mitad del tamaño de la imagen */
             opacity: 0.3; /* Hace la plantilla semi-transparente */
             pointer-events: none; /* Evita que la plantilla interfiera con las piezas */
         }
@@ -45,7 +45,7 @@
             height: 100%;
             background: linear-gradient(to right, transparent 99%, rgba(0, 0, 0, 0.5) 1%),
                         linear-gradient(to bottom, transparent 99%, rgba(0, 0, 0, 0.5) 1%);
-            background-size: 100px 100px; /* Tamaño de cada pieza */
+            background-size: 222.166px 333.333px; /* Tamaño de cada pieza */
         }
 
         .puzzle-piece {
@@ -89,9 +89,10 @@
         // Configuración del rompecabezas
         const rows = 3; // Número de filas
         const cols = 3; // Número de columnas
-        const pieceSize = 100; // Tamaño de cada pieza en píxeles
-        const puzzleWidth = cols * pieceSize; // Ancho total del rompecabezas
-        const puzzleHeight = rows * pieceSize; // Alto total del rompecabezas
+        const pieceWidth = 222.166; // Ancho de cada pieza (666.5 / 3)
+        const pieceHeight = 333.333; // Alto de cada pieza (1,000 / 3)
+        const puzzleWidth = cols * pieceWidth; // Ancho total del rompecabezas
+        const puzzleHeight = rows * pieceHeight; // Alto total del rompecabezas
 
         // Contenedor del rompecabezas
         const puzzleContainer = document.getElementById('puzzle-container');
@@ -108,15 +109,15 @@
                 for (let j = 0; j < cols; j++) {
                     const piece = document.createElement('div');
                     piece.classList.add('puzzle-piece');
-                    piece.style.width = `${pieceSize}px`;
-                    piece.style.height = `${pieceSize}px`;
+                    piece.style.width = `${pieceWidth}px`;
+                    piece.style.height = `${pieceHeight}px`;
                     piece.style.backgroundImage = `url('te amo.jpg')`;
                     piece.style.backgroundSize = `${puzzleWidth}px ${puzzleHeight}px`;
-                    piece.style.backgroundPosition = `-${j * pieceSize}px -${i * pieceSize}px`;
+                    piece.style.backgroundPosition = `-${j * pieceWidth}px -${i * pieceHeight}px`;
 
                     // Posición correcta de la pieza (relativa al contenedor del rompecabezas)
-                    piece.correctX = j * pieceSize;
-                    piece.correctY = i * pieceSize;
+                    piece.correctX = j * pieceWidth;
+                    piece.correctY = i * pieceHeight;
 
                     // Hacer las piezas arrastrables
                     makeDraggable(piece);
@@ -136,8 +137,8 @@
             pieces.forEach(piece => {
                 let x, y;
                 do {
-                    x = Math.random() * (window.innerWidth - pieceSize);
-                    y = Math.random() * (window.innerHeight - pieceSize);
+                    x = Math.random() * (window.innerWidth - pieceWidth);
+                    y = Math.random() * (window.innerHeight - pieceHeight);
                 } while (isOverlapping(x, y, positions));
 
                 // Registrar la posición ocupada
