@@ -152,68 +152,20 @@
                 }
             }
 
-            // Distribuir las piezas en los bordes de la pantalla
-            distributePieces(pieces);
+            // Colocar todas las piezas juntas en el borde superior
+            placePiecesAtTop(pieces);
         }
 
-        // Función para distribuir las piezas en los bordes de la pantalla
-        function distributePieces(pieces) {
-            const positions = new Set(); // Almacena las posiciones ocupadas
-            const margin = 10; // Margen entre las piezas
+        // Función para colocar las piezas en el borde superior
+        function placePiecesAtTop(pieces) {
+            const startX = (window.innerWidth - pieceWidth) / 2; // Centrar horizontalmente
+            const startY = 10; // Margen superior
 
-            pieces.forEach(piece => {
-                let x, y;
-                let attempts = 0;
-                const maxAttempts = 100; // Límite de intentos para evitar bucles infinitos
-
-                do {
-                    // Elegir un borde aleatorio (0: arriba, 1: derecha, 2: abajo, 3: izquierda)
-                    const edge = Math.floor(Math.random() * 4);
-
-                    switch (edge) {
-                        case 0: // Arriba
-                            x = Math.random() * (window.innerWidth - pieceWidth);
-                            y = margin;
-                            break;
-                        case 1: // Derecha
-                            x = window.innerWidth - pieceWidth - margin;
-                            y = Math.random() * (window.innerHeight - pieceHeight);
-                            break;
-                        case 2: // Abajo
-                            x = Math.random() * (window.innerWidth - pieceWidth);
-                            y = window.innerHeight - pieceHeight - margin;
-                            break;
-                        case 3: // Izquierda
-                            x = margin;
-                            y = Math.random() * (window.innerHeight - pieceHeight);
-                            break;
-                    }
-
-                    attempts++;
-                    if (attempts > maxAttempts) {
-                        // Si no se encuentra una posición válida después de muchos intentos, colocar la pieza en una posición predeterminada
-                        x = margin;
-                        y = margin;
-                        break;
-                    }
-                } while (isOverlapping(x, y, positions));
-
-                // Registrar la posición ocupada
-                positions.add(`${Math.floor(x / 10)}-${Math.floor(y / 10)}`);
-
-                // Asignar la posición a la pieza
-                piece.style.left = `${x}px`;
-                piece.style.top = `${y}px`;
-
+            pieces.forEach((piece, index) => {
+                piece.style.left = `${startX}px`;
+                piece.style.top = `${startY + index * 10}px`; // Pequeño margen vertical entre piezas
                 document.body.appendChild(piece);
             });
-        }
-
-        // Función para verificar si una posición está ocupada
-        function isOverlapping(x, y, positions) {
-            const gridX = Math.floor(x / 10);
-            const gridY = Math.floor(y / 10);
-            return positions.has(`${gridX}-${gridY}`);
         }
 
         // Función para hacer las piezas arrastrables
