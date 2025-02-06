@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rompecabezas de Amor</title>
+    <title>Rompecabezas</title>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         body {
@@ -152,8 +152,19 @@
                 }
             }
 
+            // Mezclar las piezas aleatoriamente
+            shuffleArray(pieces);
+
             // Colocar todas las piezas juntas en el borde superior
             placePiecesAtTop(pieces);
+        }
+
+        // Función para mezclar un array (algoritmo de Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
 
         // Función para colocar las piezas en el borde superior
@@ -161,9 +172,9 @@
             const startX = (window.innerWidth - pieceWidth) / 2; // Centrar horizontalmente
             const startY = 10; // Margen superior
 
-            pieces.forEach((piece, index) => {
+            pieces.forEach((piece) => {
                 piece.style.left = `${startX}px`;
-                piece.style.top = `${startY + index * 10}px`; // Pequeño margen vertical entre piezas
+                piece.style.top = `${startY}px`; // Todas las piezas en la misma posición
                 document.body.appendChild(piece);
             });
         }
