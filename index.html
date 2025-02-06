@@ -21,27 +21,27 @@
 
         #puzzle-container {
             position: relative;
-            width: 300px; /* Tamaño reducido para móviles */
-            height: 450px; /* Mantiene la proporción 1,333 x 2,000 */
-            border: 2px solid #ff6f61; /* Borde rosado */
-            background-color: #fff0f6; /* Fondo pastel rosado */
+            width: 300px; 
+            height: 450px; 
+            border: 2px solid #ff6f61; 
+            background-color: #fff0f6; 
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            box-sizing: border-box; /* Incluye el borde en el tamaño */
+            box-sizing: border-box; 
         }
 
         #template {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('t.jpg'); /* Imagen del rompecabezas */
-            background-size: 300px 450px; /* Mantiene la proporción de la imagen */
-            opacity: 0.3; /* Hace la plantilla semi-transparente */
+            background-image: url('t.jpg'); 
+            background-size: 300px 450px; 
+            opacity: 0.3; 
             pointer-events: none;
-            border: 2px solid #ff6f61; /* Borde rosado */
-            box-sizing: border-box; /* Incluye el borde en el tamaño */
+            border: 2px solid #ff6f61; 
+            box-sizing: border-box; 
         }
 
-        /* Líneas de división en la plantilla */
+        
         #template::before {
             content: "";
             position: absolute;
@@ -51,29 +51,29 @@
             height: 100%;
             background: linear-gradient(to right, transparent 99%, rgba(255, 111, 97, 0.8) 1%),
                         linear-gradient(to bottom, transparent 99%, rgba(255, 111, 97, 0.8) 1%);
-            background-size: 100px 150px; /* Tamaño de cada pieza */
+            background-size: 100px 150px; 
         }
 
         .puzzle-piece {
             position: absolute;
             cursor: grab;
             user-select: none;
-            border: 2px solid #ff6f61; /* Borde rosado */
+            border: 2px solid #ff6f61; 
             box-sizing: border-box;
             transition: transform 0.2s ease;
-            background-color: #ffe5e0; /* Fondo pastel rosado */
-            z-index: 1; /* Piezas por encima de la plantilla */
+            background-color: #ffe5e0; 
+            z-index: 1; 
         }
 
         .puzzle-piece.correct {
             cursor: default;
-            border-color: #ff477e; /* Borde rosado más oscuro */
+            border-color: #ff477e; 
             pointer-events: none;
-            z-index: 0; /* Piezas correctas por debajo de las piezas restantes */
+            z-index: 0; 
         }
 
         .puzzle-piece.correct-temp {
-            border-color: #90ee90; /* Verde claro */
+            border-color: #90ee90; 
         }
 
         #congrats-message {
@@ -82,53 +82,53 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff0f6; /* Fondo pastel rosado */
-            color: #ff6f61; /* Texto rosado */
+            background-color: #fff0f6; 
+            color: #ff6f61; 
             padding: 20px;
             border-radius: 15px;
             font-size: 24px;
             text-align: center;
             z-index: 1000;
-            border: 2px solid #ff6f61; /* Borde rosado */
+            border: 2px solid #ff6f61; 
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         #congrats-message img {
-            width: 300px; /* Mismo tamaño que la plantilla */
-            height: 450px; /* Mismo tamaño que la plantilla */
+            width: 300px; 
+            height: 450px; 
             margin-top: 10px;
             border-radius: 10px;
-            border: 2px solid #ff6f61; /* Borde rosado */
+            border: 2px solid #ff6f61; 
         }
     </style>
 </head>
 <body>
     <div id="puzzle-container">
-        <div id="template"></div> <!-- Plantilla de fondo -->
+        <div id="template"></div> 
     </div>
     <div id="congrats-message">
-        <div>Te amo ❤️</div>
-        <img src="t.jpg" alt="Imagen completada"> <!-- Imagen completa -->
+        <div>❤️ Te amo ❤️</div>
+        <img src="t.jpg" alt="Imagen completada"> 
     </div>
 
     <script>
-        // Configuración del rompecabezas
-        const rows = 3; // Número de filas
-        const cols = 3; // Número de columnas
-        const pieceWidth = 100; // Ancho de cada pieza (300 / 3)
-        const pieceHeight = 150; // Alto de cada pieza (450 / 3)
-        const puzzleWidth = cols * pieceWidth; // Ancho total del rompecabezas
-        const puzzleHeight = rows * pieceHeight; // Alto total del rompecabezas
+        
+        const rows = 3; 
+        const cols = 3; 
+        const pieceWidth = 100; 
+        const pieceHeight = 150; 
+        const puzzleWidth = cols * pieceWidth; 
+        const puzzleHeight = rows * pieceHeight; 
 
-        // Contenedor del rompecabezas
+        
         const puzzleContainer = document.getElementById('puzzle-container');
         puzzleContainer.style.width = `${puzzleWidth}px`;
         puzzleContainer.style.height = `${puzzleHeight}px`;
 
-        // Mensaje de felicitación
+        
         const congratsMessage = document.getElementById('congrats-message');
 
-        // Crear las piezas del rompecabezas
+        
         function createPuzzle() {
             const pieces = [];
             for (let i = 0; i < rows; i++) {
@@ -137,29 +137,29 @@
                     piece.classList.add('puzzle-piece');
                     piece.style.width = `${pieceWidth}px`;
                     piece.style.height = `${pieceHeight}px`;
-                    piece.style.backgroundImage = `url('t.jpg')`; /* Imagen del rompecabezas */
+                    piece.style.backgroundImage = `url('t.jpg')`; 
                     piece.style.backgroundSize = `${puzzleWidth}px ${puzzleHeight}px`;
                     piece.style.backgroundPosition = `-${j * pieceWidth}px -${i * pieceHeight}px`;
 
-                    // Posición correcta de la pieza (relativa al contenedor del rompecabezas)
+                    
                     piece.correctX = j * pieceWidth;
                     piece.correctY = i * pieceHeight;
 
-                    // Hacer las piezas arrastrables
+                    
                     makeDraggable(piece);
 
                     pieces.push(piece);
                 }
             }
 
-            // Mezclar las piezas aleatoriamente
+            
             shuffleArray(pieces);
 
-            // Colocar todas las piezas juntas en el borde superior
+            
             placePiecesAtTop(pieces);
         }
 
-        // Función para mezclar un array (algoritmo de Fisher-Yates)
+        
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -167,19 +167,19 @@
             }
         }
 
-        // Función para colocar las piezas en el borde superior
+        
         function placePiecesAtTop(pieces) {
-            const startX = (window.innerWidth - pieceWidth) / 2; // Centrar horizontalmente
-            const startY = 10; // Margen superior
+            const startX = (window.innerWidth - pieceWidth) / 2; 
+            const startY = 10; 
 
             pieces.forEach((piece) => {
                 piece.style.left = `${startX}px`;
-                piece.style.top = `${startY}px`; // Todas las piezas en la misma posición
+                piece.style.top = `${startY}px`;
                 document.body.appendChild(piece);
             });
         }
 
-        // Función para hacer las piezas arrastrables
+        
         function makeDraggable(element) {
             let isDragging = false;
             let offsetX, offsetY;
@@ -207,43 +207,43 @@
                     isDragging = false;
                     element.style.cursor = 'grab';
 
-                    // Verificar si la pieza está en la posición correcta
+                    
                     const rect = element.getBoundingClientRect();
                     const puzzleRect = puzzleContainer.getBoundingClientRect();
                     const pieceX = rect.left - puzzleRect.left;
                     const pieceY = rect.top - puzzleRect.top;
 
-                    // Margen de error aumentado a 50px
+                    
                     if (
                         Math.abs(pieceX - element.correctX) < 50 &&
                         Math.abs(pieceY - element.correctY) < 50
                     ) {
-                        // Colocar la pieza en la posición correcta (relativa al contenedor del rompecabezas)
+                        
                         element.style.left = `${puzzleRect.left + element.correctX}px`;
                         element.style.top = `${puzzleRect.top + element.correctY}px`;
                         element.classList.add('correct');
                         element.style.cursor = 'default';
 
-                        // Cambiar el borde a verde claro temporalmente
+                        
                         element.classList.add('correct-temp');
                         setTimeout(() => {
                             element.classList.remove('correct-temp');
-                        }, 500); // 500ms = 0.5 segundos
+                        }, 500); 
 
-                        // Verificar si el rompecabezas está completo
+                        
                         checkCompletion();
                     }
                 }
             });
 
-            // Soporte para pantallas táctiles
+            
             element.addEventListener('touchstart', (e) => {
                 if (!element.classList.contains('correct')) {
                     isDragging = true;
                     const touch = e.touches[0];
                     offsetX = touch.clientX - element.getBoundingClientRect().left;
                     offsetY = touch.clientY - element.getBoundingClientRect().top;
-                    e.preventDefault(); /* Evita el desplazamiento táctil */
+                    e.preventDefault(); 
                 }
             });
 
@@ -254,7 +254,7 @@
                     const y = touch.clientY - offsetY;
                     element.style.left = `${x}px`;
                     element.style.top = `${y}px`;
-                    e.preventDefault(); /* Evita el desplazamiento táctil */
+                    e.preventDefault(); 
                 }
             });
 
@@ -262,37 +262,37 @@
                 if (isDragging) {
                     isDragging = false;
 
-                    // Verificar si la pieza está en la posición correcta
+                    
                     const rect = element.getBoundingClientRect();
                     const puzzleRect = puzzleContainer.getBoundingClientRect();
                     const pieceX = rect.left - puzzleRect.left;
                     const pieceY = rect.top - puzzleRect.top;
 
-                    // Margen de error aumentado a 50px
+                    
                     if (
                         Math.abs(pieceX - element.correctX) < 50 &&
                         Math.abs(pieceY - element.correctY) < 50
                     ) {
-                        // Colocar la pieza en la posición correcta (relativa al contenedor del rompecabezas)
+                        
                         element.style.left = `${puzzleRect.left + element.correctX}px`;
                         element.style.top = `${puzzleRect.top + element.correctY}px`;
                         element.classList.add('correct');
                         element.style.cursor = 'default';
 
-                        // Cambiar el borde a verde claro temporalmente
+                        
                         element.classList.add('correct-temp');
                         setTimeout(() => {
                             element.classList.remove('correct-temp');
-                        }, 500); // 500ms = 0.5 segundos
+                        }, 500); 
 
-                        // Verificar si el rompecabezas está completo
+                        
                         checkCompletion();
                     }
                 }
             });
         }
 
-        // Verificar si el rompecabezas está completo
+        
         function checkCompletion() {
             const pieces = document.querySelectorAll('.puzzle-piece');
             const isComplete = Array.from(pieces).every(piece => piece.classList.contains('correct'));
@@ -302,10 +302,10 @@
             }
         }
 
-        // Iniciar el rompecabezas
+        
         createPuzzle();
 
-        // Prevenir el desplazamiento táctil en el cuerpo
+        
         document.body.addEventListener('touchmove', (e) => {
             e.preventDefault();
         }, { passive: false });
