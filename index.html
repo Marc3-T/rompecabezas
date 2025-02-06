@@ -152,19 +152,50 @@
                 }
             }
 
-            // Distribuir las piezas aleatoriamente sin superponerse
+            // Distribuir las piezas en los bordes de la pantalla
             distributePieces(pieces);
         }
 
-        // Función para distribuir las piezas sin superponerse
+        // Función para distribuir las piezas en los bordes de la pantalla
         function distributePieces(pieces) {
             const positions = new Set(); // Almacena las posiciones ocupadas
+            const margin = 10; // Margen entre las piezas
 
             pieces.forEach(piece => {
                 let x, y;
+                let attempts = 0;
+                const maxAttempts = 100; // Límite de intentos para evitar bucles infinitos
+
                 do {
-                    x = Math.random() * (window.innerWidth - pieceWidth);
-                    y = Math.random() * (window.innerHeight - pieceHeight);
+                    // Elegir un borde aleatorio (0: arriba, 1: derecha, 2: abajo, 3: izquierda)
+                    const edge = Math.floor(Math.random() * 4);
+
+                    switch (edge) {
+                        case 0: // Arriba
+                            x = Math.random() * (window.innerWidth - pieceWidth);
+                            y = margin;
+                            break;
+                        case 1: // Derecha
+                            x = window.innerWidth - pieceWidth - margin;
+                            y = Math.random() * (window.innerHeight - pieceHeight);
+                            break;
+                        case 2: // Abajo
+                            x = Math.random() * (window.innerWidth - pieceWidth);
+                            y = window.innerHeight - pieceHeight - margin;
+                            break;
+                        case 3: // Izquierda
+                            x = margin;
+                            y = Math.random() * (window.innerHeight - pieceHeight);
+                            break;
+                    }
+
+                    attempts++;
+                    if (attempts > maxAttempts) {
+                        // Si no se encuentra una posición válida después de muchos intentos, colocar la pieza en una posición predeterminada
+                        x = margin;
+                        y = margin;
+                        break;
+                    }
                 } while (isOverlapping(x, y, positions));
 
                 // Registrar la posición ocupada
